@@ -28,8 +28,10 @@ class _PlantDetailsState extends State<PlantDetails> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: SafeArea(
-          child: Padding(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
+      body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +121,7 @@ class _PlantDetailsState extends State<PlantDetails> {
             )
           ],
         ),
-      )),
+      ),
     );
   }
 }

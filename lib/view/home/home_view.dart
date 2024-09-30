@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:plant_shop/res/assets/image/image_assets.dart';
 import 'package:plant_shop/view/plantDetails/plant_details.dart';
@@ -45,38 +46,35 @@ class _HomeViewState extends State<HomeView> {
                 childAspectRatio: .6,
               ),
               itemBuilder: (context, index) {
-                return Card(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (ctx) => PlantDetails(
-                            imageUrl: imageAsset[index],
-                            title: title[index],
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            imageAsset[index],
-                            fit: BoxFit.cover,
-                            height: 180,
-                          ),
-                          Text(
-                            title[index],
-                            style: theme.textTheme.bodyLarge!.copyWith(
-                              color: theme.colorScheme.onSurface,
+                return OpenContainer(
+                  transitionDuration: const Duration(milliseconds: 400),
+                  closedBuilder: (context, openContainer) => Card(
+                    child: InkWell(
+                      onTap: openContainer,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              imageAsset[index],
+                              fit: BoxFit.cover,
+                              height: 180,
                             ),
-                          )
-                        ],
+                            Text(
+                              title[index],
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                color: theme.colorScheme.onSurface,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
+                  ),
+                  openBuilder: (context, action) => PlantDetails(
+                    imageUrl: imageAsset[index],
+                    title: title[index],
                   ),
                 );
               },
